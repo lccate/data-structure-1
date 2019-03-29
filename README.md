@@ -111,6 +111,77 @@ Status InsertList(SqLIst *L,int i,Elemtype e)
 循环链表：首尾相接的单链表  
 双向链表：在单链表的每个结点中，再设置一个指向其前驱结点的指针  
 我主要记录了单链表的知识点，其他类型的链表有用到再说  
+##### 单链表  
+明确单链表的定义(结点、指针域(存放指针)、数据域(存放数据信息))  
+![单链表](15.png)   
+链表头结点的指针域存放头指针，头结点的数据域可以不存储任何信息，也可以存储线性表的长度等附加信息，链表最后一个结点的指针域指向空，用“NULL”或“^”表示  
+![单链表](16.png)   
+链表结点的数据信息和指针在代码中的表示方法  
+![单链表](17.png)   
+##### 单链表的读取、插入、删除基本操作  
+获得链表第i个数据给e：  
+```
+Status GetElem(Linklist L,int i,ElemType *e)
+{
+  int j=1;
+  Linklist p = L->next;//定义指针p指向L的第一个结点
+  while(p && j<i)
+    {
+    p=p->next;
+    ++j;//j++可以吗？
+    }
+  if(!p || j>i)
+    return ERROR;//第i个结点不存在
+  *e = p->data;//取第i个结点的数据  
+  return OK;
+}
+```
+在链表L中第i个结点位置之前插入新的数据元素e，L的长度加一：  
+```
+Status ListInsert(LinkList L,int i,ElemType e)
+{
+  int j=1;
+  Linklist p=L->next;
+  LinkList s;
+  while(p && j<i)
+    {
+    p = p->next;
+    ++j;
+    }
+  if(!p || j>i)
+    return ERROR;
+  s = (LinkList)malloc(sizeof(Node));//生成新结点
+  s->data = e;
+  s->next = p->next;
+  p->next = s;
+  L->length++;
+  return OK;
+}
+```
+将链表L中第i个结点删除，L的长度减一：  
+```
+Status ListInsert(LinkList L,int i,ElemType e)
+{
+  int j=1;
+  Linklist p=L->next;
+  LinkList s;
+  while(p && j<i)
+    {
+    p = p->next;
+    ++j;
+    }
+  if(!p || j>i)
+    return ERROR;
+  s=p->next;
+  p->next = s->next;
+  e = s->data;
+  L->length--;
+  return OK;
+```
+##### 单链表的整表创建，整表删除  
+
+
+
 
 ## 数组和链表的区别    
 数组和链表的区别也就是顺序存储结构和链式存储结构的区别  
