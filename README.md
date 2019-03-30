@@ -179,18 +179,62 @@ Status ListInsert(LinkList L,int i,ElemType e)
   return OK;
 ```
 ##### 单链表的整表创建，整表删除  
-
-
-
-
-## 数组和链表的区别    
-数组和链表的区别也就是顺序存储结构和链式存储结构的区别  
-数组：连续，定长，不适合做插入删除等操作，可以直接通过下标进行访问  
-打个形象的比方，停车场的每一排都可以看做一个数组，定长，连续，如果要插入停车，后面的每辆车都要移动位置，所以不适合做插入，直接追加很快  
-python中的list与数组类似，但是长度可变，可视作动态的数组  
-链表：不连续，不定长，适合做插入删除等操作，不可以直接通过下标访问（与数组正好相反）  
-形象的比方：曲别针  
-## 队列和栈  
+单链表整表创建有两种方法：  
+头插法：始终把新结点放在头结点后  
+随机产生n个元素的值，建立单链表L  
+```
+void CreatList(LinkList *L,int n)
+{
+  LinkList p;
+  int i;
+  srand(time(0));//初始化随机数种子 
+  *L=(LinkList)malloc(sizeof(Node));//生成新结点
+  (*L)->next = NULL;//头结点指针指向null，建立一个带头结点的单链表
+  for (i=0;i<n;i++)
+  {
+    p=(LinkList)malloc(sizeof(Node));//生成新结点
+    p->data = rand()%100+1;//随机生成100以内的数字给数据域
+    p->next = (*L)->next;
+    (*L)->next = p;
+  }
+}
+```
+尾插法：每次生成的新结点都放在终端结点后  
+```
+void CreatList(LinkList *L,int n)
+{
+  LinkList p;
+  int i;
+  srand(time(0));//初始化随机数种子 
+  *L=(LinkList)malloc(sizeof(Node));//生成新结点
+  LinkList r = *L;//r为指向尾部的结点
+  for (i=0;i<n;i++)
+  {
+    p=(LinkList)malloc(sizeof(Node));//生成新结点
+    p->data = rand()%100+1;//随机生成100以内的数字给数据域
+    r->next = p;
+    r= p;//将当前的新结点定义为尾部结点
+  }
+  r->next=NULL;//循环结束后让尾部结点置空
+}
+```
+单链表整表删除：  
+```
+Status ClearList(LinkList *L)
+{
+LinkList p,s;
+p = (*L)->next;
+while(p)
+  {
+    s = p->next;
+    free(p);
+    p = s;
+  }
+  (*L)->next=NULL;
+  return OK;
+}
+``` 
+## 4 队列和栈  
 队列：先进先出，只能从队列末尾插入数据，从队列头部取出数据  
 形象的比方：食堂排队打饭  
 [用python实现队列](py_queue.py)  
