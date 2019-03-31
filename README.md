@@ -242,7 +242,41 @@ while(p)
 [用python实现队列](py_queue.py)  
 ### 4.1 栈  
 #### 4.1.1 栈的定义  
-限定仅在 
+限定仅在表尾进行插入和删除的操作  
+栈顶(top)栈底(bottom)后进先出(LIFO结构)  
+注意：这里的表尾是指栈顶top而不是栈底  
+思考：最先进栈的元素是不是只能最后出栈？不一定  
+栈的操作：  
+插入（进栈、压、push）  
+删除（出栈、弹、pop）  
+##### 栈的顺序存储结构实现  
+空栈的判定条件：top = -1 
+满栈的判定条件：top = MAXSIZE-1  
+进栈操作push的实现：插入元素e作为新的栈顶元素  
+```
+Status Push(SqStack *S, SElemType e)
+{
+  if(S->top == MAXSIZE-1)//栈满
+    return ERROR;
+  s->top++;//栈顶指针加一
+  s->data[s->top]=e;//新加入元素e赋值给栈顶
+  return OK;
+}
+```
+出栈操作pop的实现：若栈不空，删除s的栈顶元素，用e返回值  
+```
+Status Pop(SqStack *S,SElemType e)
+{
+  if(S->top == -1)//栈空
+    return ERROR;
+  e = S->data[S->top];
+  S->top--;
+  return OK;
+}
+```
+两栈共享空间：  
+栈满条件(两个指针之间相差1)：top1+1=top2  
+对于
 ## 树  
 计算机科学中的树可以看过倒挂的树，根在上，分支在下  
 ![树示意图](1.png)  
