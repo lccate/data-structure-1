@@ -345,18 +345,46 @@ Status Push(LinkStack *S,SElemType e)
 递归函数：一个直接或间接调用自己的函数  
 递归函数必须要有终止条件，否则会陷入无穷循环中，消耗内存  
 迭代使用的是循环结构，递归使用的是选择结构  
-分别用迭代和递归的方法实现斐波那契数列：  
+分别用迭代和递归的方法实现打印前40位斐波那契数列：  
 斐波那契数列：前面相邻两项之和构成了下一项  
 ![斐波那契](18.png)  
 ```
 //迭代
-
+int main()
+{
+int i;
+int a[40];
+a[0]=0;
+a[1]=1;
+printf("%d\n",a[0]);
+printf("%d\n",a[1]);
+for(i=2;i<40;i++)
+  {
+    a[i]=a[i-1]+a[i-2];
+    printf("%d\n",a[i];
+  }
+return 0;
+}
 ```
 ```
 //递归
+int Fbi(int i)
+{
+  if(i<2)
+    return i==0?0:1;
+  return Fbi(i-1)+Fbi(i-2);
+}
+int main()
+{
+  int i;
+  for(i=0;i<40;i++)
+    {
+      printf("%d\n",Fbi[i];
+    }
+  return 0;
+}
 
 ```
-
 2.四则运算表达式求值  
 
 ### 4.2 队列  
