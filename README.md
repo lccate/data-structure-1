@@ -276,7 +276,92 @@ Status Pop(SqStack *S,SElemType e)
 ```
 两栈共享空间：  
 栈满条件(两个指针之间相差1)：top1+1=top2  
-对于
+对于两栈共享空间的push和pop操作，需要有一个判断是栈1还是栈2的栈号参数stackNumber  
+进栈push：  
+```
+Status Push(SqDoubleStack *S,SElemType e,int stackNumber)
+{
+  if(S->top+1==S->top2)
+    return ERROR;
+  if(int stackNumber==1)
+    S->top1++;
+    S->data[S->top1]=e;
+  elif(stackNumber==2)
+    S->top2--;
+    S->data[S->top2]=e;
+  return OK;
+}
+```
+出栈pop：  
+```
+Status Pop(SqDoubleStack *S,SElemType e,int stackNumber)
+{
+  if(stackNumber==1)
+  {
+    if(S->top1 == -1)
+      return ERROR;
+    e=S->data[S->top1--];
+  }  
+  elif(stackNumber==2)
+  {
+    if(S->top2 == MAXSIZE)//如果栈空对于栈2来说是maxsize
+      return ERROR;
+    e=S->data[S->top2++];
+  }
+  return OK;
+}
+```
+##### 栈的链式存储结构实现  
+栈的链式存储结构简称“链栈”，如果栈的使用过程中元素变化不可预料最好用链栈，如果变化范围可控最好用顺序栈  
+栈顶放在单链表的头部  
+对于空栈，top=NULL  
+链栈进栈操作：插入元素e为新的栈顶元素,e的新结点为p  
+```
+Status Push(LinkStack *S,SElemType e)
+{
+  LinkStackPtr p = (LinkStackPtr)malloc(sizeof(StackNode)):
+  p->data=e;
+  p->next=S->top;
+  S->top=p;
+  S->count++;
+  return OK;
+}
+```
+链栈出栈操作：删除S的栈顶元素，用e返回  
+```
+Status Push(LinkStack *S,SElemType e)
+{
+  LinkStackPtr p = (LinkStackPtr)malloc(sizeof(StackNode)):
+  e=S->top->data;
+  p=S->top;
+  S->top=S->top->next;
+  free(p);
+  S->count--;
+  return OK;
+}
+```
+##### 栈的应用  
+1.迭代与递归  
+递归函数：一个直接或间接调用自己的函数  
+递归函数必须要有终止条件，否则会陷入无穷循环中，消耗内存  
+迭代使用的是循环结构，递归使用的是选择结构  
+分别用迭代和递归的方法实现斐波那契数列：  
+斐波那契数列：前面相邻两项之和构成了下一项  
+![斐波那契](18.png)  
+```
+//迭代
+
+```
+```
+//递归
+
+```
+
+2.四则运算表达式求值  
+
+### 4.2 队列  
+
+
 ## 树  
 计算机科学中的树可以看过倒挂的树，根在上，分支在下  
 ![树示意图](1.png)  
