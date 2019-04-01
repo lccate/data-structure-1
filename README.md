@@ -400,7 +400,50 @@ int main()
 判断队空的条件：front=rear  
 判断队满条件：(rear+1)%QueuesSize=front  
 通用的计算队列长度的公式：(rear-front+QueuesSize)%QueuesSize  
-循环队列
+  
+循环队列初始化  
+```
+Status InitQueue(SqQueue *Q)
+{
+Q->front=0;
+Q->rear=0;
+return OK;
+}
+```
+  
+求循环队列长度  
+```
+Status InitQueue(SqQueue Q)
+{
+  return (Q.rear-Q.front+MAXSIZE)%MAXSIZE;
+}
+```
+  
+循环队列的入队列操作  
+```
+Status EnQueue(SqQueue *Q,QElemType e)
+{
+  if((Q->rear+1)%MAXSIZE == Q->front)  //队列满
+    return ERROR;
+  Q->data[Q->rear] = e;
+  Q->rear = (Q->rear+1)%MAXSIZE;  //rear指针向后移一位置，若到最后则转到数组头部 
+  return OK;
+}
+```
+  
+循环队列的出队列操作  
+```
+Status EnQueue(SqQueue *Q,QElemType e)
+{
+  if(Q->rear == Q->front)  //队空
+    return ERROR;
+  e = Q->data[Q->front];
+  Q->front = (Q->front+1)%MAXSIZE;  //front指针向后移一位置，若到最后则转到数组头部 
+  return OK;
+}
+```
+#### 4.2.3 队列的链式存储结构  
+简称链队列
 
 
 ## 树  
