@@ -443,8 +443,28 @@ Status EnQueue(SqQueue *Q,QElemType e)
 }
 ```
 #### 4.2.3 队列的链式存储结构  
-简称链队列
-
+简称链队列  
+front指向头结点，rear指向最后一个结点（队尾）  
+注意：队头是在头结点后面，也就是front->next,删除元素就是从头结点之后的队头开始删除  
+空队列时，rear和front都指向头结点  
+在队列Q的队尾插入元素e：  
+```
+s->data = e;
+s->next = NULL;
+Q->rear->next = s;
+Q->rear = s
+```
+删除队列Q的队头，用e返回其值：  
+```
+//设置指针p，用来存放要删除的
+p = Q->front->next;
+e = p->data;
+Q->frint->next = p->next;
+free(p);
+```
+## 5 串  
+### 5.1 定义  
+又叫字符串，零或多个字符组成的有限数列  
 
 ## 树  
 计算机科学中的树可以看过倒挂的树，根在上，分支在下  
