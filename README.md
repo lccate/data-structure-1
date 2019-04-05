@@ -478,11 +478,47 @@ s=“a1a2a3......an"(n>=0)
 ```
 int Index(String S, String T, int pos)
 {
-
-return 0;
+int i=pos;  //i表示主串s的下标
+int j=1;  //j表示子串T的下标
+while(i<=S[0] && j<=L[0])
+{
+  if(S[i]=T[j])  //如果两字母相等则继续遍历
+  {
+    ++i;
+    ++j;
+  }
+  else
+  {
+  i=i-j+2;  //否则i退回上次匹配位置的下一位
+  j=1;  //j退回T的起始位置
+  }
+}
+if(j>T[0])
+  return(i-T[0])
+else
+  return 0;
 }
 ```
-
+### 5.3 KMP模式匹配算法  
+关键：根据子串T和T的当前位置下标j推导next[j]数组  
+```
+void get_next(string T, int *next)
+{
+int i=1,j=1;  //T[j]表示前缀的单个字符，T[i]表示后缀的单个字符  
+next[1]=0;
+while(i<T[0])
+{
+  if(T[i]==T[j])
+  {
+    ++i;
+    ++j;
+    next[i]=j-1;
+  }
+  else
+    j=next[j];
+}
+}
+```
 
 ## 树  
 计算机科学中的树可以看过倒挂的树，根在上，分支在下  
