@@ -704,6 +704,21 @@ void CreateTree(BiTree *T)
 #### 7.2.5 边集数组  
 边集数组由两个一维数组构成，一个存储顶点的信息，另一个存储边的信息，更适合对边进行的操作  
 ![边集数组](29.png)  
+### 7.3 图的遍历  
+通常有两种遍历方案，深度优先遍历（depth first search）DFS，广度优先遍历（breadth first search）BFS  
+### 7.4 最小生成树  
+构造连通网的最小生成树的两种经典算法，prim算法和kruskal算法  
+#### 7.4.1 prim算法  
+#### 7.4.1 kruskal算法  
+### 7.5 最短路径  
+dijkstra算法和floyd算法  
+#### 7.5.1 dijkstra算法  
+#### 7.5.2 floyd算法  
+### 7.6 拓扑排序  
+### 7.7 关键路径  
+
+
+
 
 
 
